@@ -18,7 +18,7 @@ A tool to download and maintain a local copy of Wikipedia using official databas
 ### Quick Install
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone git@github.com:martindale/wikisync.git
 cd wikisync
 
 # Run the installer

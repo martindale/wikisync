@@ -35,7 +35,7 @@ sudo dnf install python3 python3-pip curl wget
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-repo/wikisync.git
+   git clone https://github.com/martindale/wikisync.git
    cd wikisync
    ```
 
