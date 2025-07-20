@@ -1,11 +1,8 @@
 # WikiSync Installation Guide
-
 This guide provides detailed instructions for installing WikiSync on Linux systems.
 
 ## Prerequisites
-
 ### System Requirements
-
 - **Operating System**: Linux (Ubuntu 18.04+, CentOS 7+, Debian 9+, etc.)
 - **Python**: 3.8 or higher
 - **Disk Space**: Minimum 50GB free space (500GB+ recommended for full Wikipedia)
@@ -13,9 +10,7 @@ This guide provides detailed instructions for installing WikiSync on Linux syste
 - **Network**: Stable internet connection for initial download
 
 ### Required Packages
-
 Install the following system packages:
-
 **Ubuntu/Debian:**
 ```bash
 sudo apt update
@@ -30,9 +25,7 @@ sudo dnf install python3 python3-pip curl wget
 ```
 
 ## Installation Methods
-
 ### Method 1: Quick Install (Recommended)
-
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/martindale/wikisync.git
@@ -52,7 +45,6 @@ The installer will:
 - Configure log rotation
 
 ### Method 2: Manual Installation
-
 1. **Create installation directory:**
    ```bash
    sudo mkdir -p /opt/wikipedia
@@ -87,9 +79,7 @@ The installer will:
    ```
 
 ## Configuration
-
 ### Basic Configuration
-
 Edit the configuration file:
 ```bash
 sudo nano /opt/wikipedia/config.yaml
@@ -103,7 +93,6 @@ Key configuration options:
 - **Download Directory**: Change `download.directory` if needed
 
 ### Advanced Configuration
-
 #### Resource Limits
 ```yaml
 resources:
@@ -130,21 +119,17 @@ logging:
 ```
 
 ## Post-Installation Setup
-
 ### 1. Start the Service
-
 ```bash
 sudo systemctl start wikisync
 ```
 
 ### 2. Check Service Status
-
 ```bash
 sudo systemctl status wikisync
 ```
 
 ### 3. View Logs
-
 ```bash
 # View real-time logs
 sudo journalctl -u wikisync -f
@@ -154,7 +139,6 @@ sudo journalctl -u wikisync --since "1 hour ago"
 ```
 
 ### 4. Manual Synchronization
-
 ```bash
 # Perform immediate sync
 sudo /opt/wikipedia/wikisync.py --sync
@@ -164,9 +148,7 @@ sudo /opt/wikipedia/wikisync.py --status
 ```
 
 ## Verification
-
 ### Check Installation
-
 1. **Verify service is running:**
    ```bash
    sudo systemctl is-active wikisync
@@ -183,16 +165,13 @@ sudo /opt/wikipedia/wikisync.py --status
    ```
 
 ### Test Configuration
-
 ```bash
 # Test configuration loading
 sudo /opt/wikipedia/wikisync.py --status
 ```
 
 ## Troubleshooting
-
 ### Common Issues
-
 #### 1. Permission Denied
 ```bash
 # Fix permissions
@@ -226,9 +205,7 @@ sudo /opt/wikipedia/wikisync.py --cleanup
 ```
 
 ### Log Analysis
-
 Common log messages and their meanings:
-
 - `Starting Wikipedia synchronization` - Sync process started
 - `File already up to date` - No download needed
 - `Successfully downloaded` - File downloaded successfully
@@ -236,7 +213,6 @@ Common log messages and their meanings:
 - `Error downloading` - Network or server issues
 
 ## Uninstallation
-
 To completely remove WikiSync:
 
 ```bash
@@ -251,10 +227,9 @@ This will:
 - Remove the system user
 
 ## Support
-
 For issues and questions:
 
 1. Check the logs: `sudo journalctl -u wikisync`
 2. Review configuration: `sudo cat /opt/wikipedia/config.yaml`
 3. Test manually: `sudo /opt/wikipedia/wikisync.py --sync`
-4. Check system resources: `df -h && free -h` 
+4. Check system resources: `df -h && free -h`

@@ -39,11 +39,11 @@ check_root() {
 # Stop and disable service
 stop_service() {
     print_status "Stopping and disabling service..."
-    
+
     if systemctl is-active --quiet "$SERVICE_NAME"; then
         systemctl stop "$SERVICE_NAME"
     fi
-    
+
     if systemctl is-enabled --quiet "$SERVICE_NAME"; then
         systemctl disable "$SERVICE_NAME"
     fi
@@ -52,7 +52,7 @@ stop_service() {
 # Remove systemd service
 remove_service() {
     print_status "Removing systemd service..."
-    
+
     if [ -f "/etc/systemd/system/$SERVICE_NAME.service" ]; then
         rm -f "/etc/systemd/system/$SERVICE_NAME.service"
         systemctl daemon-reload
@@ -62,7 +62,7 @@ remove_service() {
 # Remove log rotation
 remove_log_rotation() {
     print_status "Removing log rotation configuration..."
-    
+
     if [ -f "/etc/logrotate.d/$SERVICE_NAME" ]; then
         rm -f "/etc/logrotate.d/$SERVICE_NAME"
     fi
@@ -71,7 +71,7 @@ remove_log_rotation() {
 # Remove installation directory
 remove_installation() {
     print_status "Removing installation directory..."
-    
+
     if [ -d "$INSTALL_DIR" ]; then
         read -p "Remove all downloaded Wikipedia data? This will free up disk space. (y/N): " -n 1 -r
         echo
@@ -87,7 +87,7 @@ remove_installation() {
 # Remove system user
 remove_user() {
     print_status "Removing system user..."
-    
+
     if id "wikisync" &>/dev/null; then
         userdel wikisync 2>/dev/null || true
     fi
@@ -98,15 +98,15 @@ main() {
     echo "WikiSync Uninstall Script"
     echo "========================"
     echo
-    
+
     check_root
-    
+
     stop_service
     remove_service
     remove_log_rotation
     remove_installation
     remove_user
-    
+
     echo
     print_status "Uninstallation completed!"
     echo
@@ -115,4 +115,4 @@ main() {
 }
 
 # Run main function
-main "$@" 
+main "$@"

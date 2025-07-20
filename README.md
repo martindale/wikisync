@@ -3,6 +3,8 @@ A tool to download and maintain a local copy of Wikipedia using official databas
 
 ## Features
 - Downloads Wikipedia database dumps from official sources
+- Automatic unpacking of compressed files
+- Canonical directory with latest versions always available
 - Incremental synchronization to keep local copy up-to-date
 - Configurable retention policies
 - Systemd service integration
@@ -74,6 +76,17 @@ sudo journalctl -u wikisync -f
 sudo /opt/wikipedia/wikisync.py --sync
 ```
 
+### Check status and available files
+```bash
+sudo /opt/wikipedia/wikisync.py --status
+```
+
+This will show:
+- Last synchronization time
+- Number of compressed, unpacked, and canonical files
+- Total disk usage
+- List of available canonical files in `/opt/wikipedia/latest/`
+
 ## Directory Structure
 ```
 /opt/wikipedia/
@@ -83,8 +96,18 @@ sudo /opt/wikipedia/wikisync.py --sync
 ├── install.sh          # Installation script
 ├── systemd/            # Systemd service files
 ├── logs/               # Log files
-└── data/               # Downloaded Wikipedia data
+├── data/               # Downloaded compressed Wikipedia dumps
+├── unpacked/           # Unpacked files (historical versions)
+└── latest/             # Canonical latest versions (always up-to-date)
 ```
 
+## File Organization
+
+- **`/opt/wikipedia/data/`**: Contains compressed Wikipedia dumps (`.bz2`, `.gz` files)
+- **`/opt/wikipedia/unpacked/`**: Contains unpacked files from previous syncs
+- **`/opt/wikipedia/latest/`**: Contains the most recent unpacked versions of all files
+
+Applications should reference files from the `latest/` directory to always get the most current data.
+
 ## License
-MIT License - see LICENSE file for details. 
+MIT License - see LICENSE file for details.

@@ -1,5 +1,4 @@
 # WikiSync Configuration
-
 # Wikipedia settings
 wikipedia:
   language: "en"  # Language code (en, de, fr, etc.)
@@ -10,6 +9,8 @@ wikipedia:
 download:
   directory: "/opt/wikipedia/data"
   temp_directory: "/opt/wikipedia/temp"
+  unpacked_directory: "/opt/wikipedia/unpacked"
+  canonical_directory: "/opt/wikipedia/latest"
   max_concurrent_downloads: 3
   chunk_size: 8192  # bytes
   timeout: 300  # seconds
@@ -23,6 +24,7 @@ sync:
   check_interval: 3600  # seconds (for service mode)
   incremental: true
   verify_checksums: true
+  unpack_after_download: true
 
 # Files to download
 files:
@@ -66,4 +68,4 @@ notifications:
   webhook:
     enabled: false
     url: ""
-    timeout: 30 
+    timeout: 30
