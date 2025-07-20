@@ -1,0 +1,69 @@
+# WikiSync Configuration
+
+# Wikipedia settings
+wikipedia:
+  language: "en"  # Language code (en, de, fr, etc.)
+  base_url: "https://dumps.wikimedia.org"
+  dump_url: "https://dumps.wikimedia.org/{language}wiki/latest/"
+
+# Download settings
+download:
+  directory: "/opt/wikipedia/data"
+  temp_directory: "/opt/wikipedia/temp"
+  max_concurrent_downloads: 3
+  chunk_size: 8192  # bytes
+  timeout: 300  # seconds
+  retry_attempts: 3
+  retry_delay: 60  # seconds
+
+# Synchronization settings
+sync:
+  frequency: "daily"  # daily, weekly, monthly
+  time: "02:00"  # 24-hour format
+  check_interval: 3600  # seconds (for service mode)
+  incremental: true
+  verify_checksums: true
+
+# Files to download
+files:
+  - "pages-articles.xml.bz2"  # Main articles
+  - "pages-articles-multistream.xml.bz2"  # Alternative format
+  - "pages-meta-current.xml.bz2"  # Current pages metadata
+  - "page.sql.gz"  # Page metadata
+  - "categorylinks.sql.gz"  # Category information
+  - "langlinks.sql.gz"  # Language links
+
+# Retention settings
+retention:
+  keep_versions: 3  # Number of previous versions to keep
+  max_age_days: 30  # Maximum age of files to keep
+  cleanup_after_sync: true
+
+# Resource limits
+resources:
+  max_memory_mb: 2048
+  max_cpu_percent: 80
+  disk_space_threshold_gb: 10
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "/opt/wikipedia/logs/wikisync.log"
+  max_size_mb: 100
+  backup_count: 5
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Notifications (optional)
+notifications:
+  email:
+    enabled: false
+    smtp_server: "localhost"
+    smtp_port: 587
+    username: ""
+    password: ""
+    from_address: "wikisync@localhost"
+    to_addresses: []
+  webhook:
+    enabled: false
+    url: ""
+    timeout: 30 
